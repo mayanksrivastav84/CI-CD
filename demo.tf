@@ -1,3 +1,5 @@
+##AWS Credential Details
+
 variable "aws_access_key" {}
 variale  "aws_secret_key" {}
 
