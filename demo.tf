@@ -1,4 +1,4 @@
-##AWS Credential Details
+##AWS Credential Details For Demo
 
 variable "aws_access_key" {}
 variale  "aws_secret_key" {}
