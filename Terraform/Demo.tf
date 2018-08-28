@@ -44,5 +44,5 @@ resource "aws_instance" "nginx" {
 # Output from Deployment
 ########################################################################################################
 output "aws_instance_public_dns" {
-  value = "${aws_instance.ngnix.public_dns}"
+  value = "${aws_instance.nginx.public_dns}"
 }
