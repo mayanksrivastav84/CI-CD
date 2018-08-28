@@ -4,10 +4,7 @@
 
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
-variable "private_keypath" {}
-variable "key_name" {
-  default = "FactorSense"
-}
+
 
 ########################################################################################################
 # Provider
@@ -31,18 +28,3 @@ resource "aws_instance" "nginx" {
     user        = "ec2-user"
     private_key = "${file(var.private_key_path)}"
   }
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo yum install nginx -y",
-      "sudo service nginx start"
-      ]
-    }
- }
-
-########################################################################################################
-# Output from Deployment
-########################################################################################################
-output "aws_instance_public_dns" {
-    value = "${aws_instance.nginx.public_dns}"
-}
