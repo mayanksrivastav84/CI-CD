@@ -1,5 +1,5 @@
-aws_access_key = "AKIAJRW5H6R5JNFW2UXQ"
+aws_access_key = "<>"
 
-aws_secret_key = "IFfwXVpUrj6mbM23jEn+gXVGGvmVXSATyedXkVZt"
+aws_secret_key = "<>"
 
-private_keypath = "/Users/MayankSrivastava/github/infrastructure_automation/Private_Key/"
+private_key_path = "<>"
