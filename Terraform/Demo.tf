@@ -6,7 +6,7 @@ variable "aws_access_key" {}
 variable "aws_secret_key" {}
 variable "private_keypath" {}
 variable "key_name" {
-  default = "FactorSenseKeys"
+  default = "FactorSense"
 }
 
 ########################################################################################################
