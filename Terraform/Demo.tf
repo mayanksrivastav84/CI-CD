@@ -1,12 +1,12 @@
 ########################################################################################################
-Security Variables
+#Security Variables
 ########################################################################################################
 
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
-variable "private_key_path" {}
+variable "private_keypath" {}
 variable "key_name" {
-  default = "FactorSenseKeys"
+  default = "FactorSense"
 }
 
 ########################################################################################################
@@ -44,5 +44,5 @@ resource "aws_instance" "nginx" {
 # Output from Deployment
 ########################################################################################################
 output "aws_instance_public_dns" {
-  value = "${aws_instance.ngnix.public_dns}"
+    value = "${aws_instance.nginx.public_dns}"
 }
