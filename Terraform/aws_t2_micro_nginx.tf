@@ -23,7 +23,7 @@ provider "aws" {
 # RESOURCES
 ########################################################################################################
 resource "aws_instance" "nginx" {
-  ami           = "ami-c58c1dd3"
+  ami           = "ami-6871a115"
   instance_type = "t2.micro"
   key_name      = "${var.key_name}"
 
@@ -34,6 +34,7 @@ resource "aws_instance" "nginx" {
 
   provisioner "remote-exec" {
     inline = [
+      "sudo yum install epel-release -y",
       "sudo yum install nginx -y",
       "sudo service nginx start"
       ]
