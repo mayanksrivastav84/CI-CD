@@ -25,11 +25,10 @@ provider "aws" {
 ########################################################################################################
 # RESOURCES
 ########################################################################################################
-
-#Security Groups#
+#Security Groups
 resource "aws_security_group" "nginx-sg" {
   name = "nginx-sg"
-  vpc_id = "${aws_vpc.vpc.id}"
+
 
   #SSH Access from Anywhere
 
@@ -64,7 +63,6 @@ resource "aws_security_group" "nginx-sg" {
 resource "aws_instance" "nginx" {
 ami           = "${var.ami_id}"
 instance_type = "${var.instance_type}"
-subnet_id = "${aws_subnet.subnet1.id}"
 vpc_security_group_ids = ["${aws_security_group.nginx-sg.id}"]
 key_name      = "${var.key_name}"
 
