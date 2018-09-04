@@ -1,5 +1,5 @@
 ########################################################################################################
-#Security Variables
+#Security Variables for AWS
 ########################################################################################################
 
 variable "aws_access_key" {}
@@ -112,7 +112,7 @@ resource "aws_security_group" "nginx-sg" {
   }
 
   #SSH Access from Anywhere
-  egress {
+  ingress {
     from_port = 80
     to_port = 80
     protocol = "tcp"
