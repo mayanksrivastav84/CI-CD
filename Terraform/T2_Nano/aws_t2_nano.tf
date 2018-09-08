@@ -14,11 +14,11 @@ variable "network_address_space" {
 }
 
 variable "subnet1_address_space" {
-  default = "10.1.0.0git fetch origin master/24"
+  default = "10.1.0.0/24"
 }
 
 variable "subnet2_address_space" {
-  default = "10.1.0.0/24"
+  default = "10.1.1.0/24"
 }
 
 ########################################################################################################
@@ -60,7 +60,7 @@ resource "aws_subnet" "subnet1" {
   cidr_block = "${var.subnet1_address_space}"
   vpc_id = "${aws_vpc.vpc.id}"
   map_public_ip_on_launch = "true"
-  availability_zone = "{data.aws_availability_zone.available.names[0]}"
+  availability_zone = "${data.aws_availability_zones.available.names[0]}"
 }
 
 
@@ -68,7 +68,7 @@ resource "aws_subnet" "subnet2" {
   cidr_block = "${var.subnet2_address_space}"
   vpc_id = "${aws_vpc.vpc.id}"
   map_public_ip_on_launch = "true"
-  availability_zone = "{data.aws_availability_zone.available.names[1]}"
+  availability_zone = "${data.aws_availability_zones.available.names[1]}"
 }
 
 
@@ -85,13 +85,13 @@ resource "aws_route_table" "rtb" {
 
 
 resource "aws_route_table_association" "rta-subnet1" {
-  subnet_id = "$aws_subnet.subnet1.id"
+  subnet_id = "${aws_subnet.subnet1.id}"
   route_table_id = "${aws_route_table.rtb.id}"
 }
 
 
 resource "aws_route_table_association" "rta-subnet2" {
-  subnet_id = "$aws_subnet.subnet2.id"
+  subnet_id = "${aws_subnet.subnet2.id}"
   route_table_id = "${aws_route_table.rtb.id}"
 }
 
@@ -132,7 +132,7 @@ resource "aws_security_group" "nginx-sg" {
 
   resource "aws_instance" "nginx" {
   ami           = "ami-6871a115"
-  instance_type = "t2.nano"
+  instance_type = "t2.micro"
   subnet_id = "${aws_subnet.subnet1.id}"
   vpc_security_group_ids = ["${aws_security_group.nginx-sg.id}"]
   key_name      = "${var.key_name}"
@@ -142,7 +142,6 @@ resource "aws_security_group" "nginx-sg" {
     user        = "ec2-user"
     private_key = "${file(var.private_key_path)}"
   }
-
  }
 
 ########################################################################################################
