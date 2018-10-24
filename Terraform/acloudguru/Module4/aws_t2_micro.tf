@@ -1,5 +1,5 @@
 ########################################################################################################
-# Variables for AWS and Azure Resource providers
+# Variables for AWS and Azure Resource providers with access
 ########################################################################################################
 
 variable "aws_access_key" {}
