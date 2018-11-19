@@ -1,3 +1,4 @@
+#simple playbook to test ping
 -
   name: Test connectivity to Target Servers
   hosts: all

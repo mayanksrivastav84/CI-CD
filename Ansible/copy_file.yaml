@@ -1,0 +1,8 @@
+-
+   name:  Copy file to target Servers
+   hosts: all
+   tasks: 
+     - name: Copy file
+       copy: 
+         src: /Users/mayanksrivastava/ci-cd/Ansible/Readme.md
+         dest: /tmp/Readme.md

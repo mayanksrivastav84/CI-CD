@@ -1,0 +1,7 @@
+#Install mysql on target machine
+
+-
+    name: Install mysql on target machine
+    host: ns3112744.ip-54-36-108.eu
+    tasks:
+       
