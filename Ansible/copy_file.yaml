@@ -1,3 +1,4 @@
+# Sample Ansible playbook to push file to remote server
 -
    name:  Copy file to target Servers
    hosts: all
