@@ -1,7 +1,16 @@
 #Install mysql database on the target Hosts
-
 -
-    name: Install mysql on target machine
-    host: ns3112744.ip-54-36-108.eu
-    tasks:
-       
+   name:  Copy file to target Servers
+   hosts: ns3080240.ip-145-239-0.eu
+   tasks: 
+     - name: Download mysql rpm file
+       get_url: 
+         url_username: mayank.srivastav84@gmail.com
+         url_password: Residency18
+         url: https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+         dest: /tmp
+         mode: 0440
+     - name: Install RPM file for mysql 
+       command: /usr/bin/rpm -ivh /tmp/mysql80-community-release-el7-1.noarch.rpm
+     - name: Yum Install mysql
+       yum: name=mysql-server state=present
