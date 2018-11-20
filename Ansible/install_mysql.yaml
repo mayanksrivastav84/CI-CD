@@ -1,4 +1,4 @@
-#Install mysql database on target Hosts
+#Install mysql database on the target Hosts
 
 -
     name: Install mysql on target machine
