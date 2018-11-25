@@ -1,7 +1,7 @@
 #install-services.yaml
 
 ---
-  - hosts: Utility:master
+  - hosts: loadbalancer
     become: true
     tasks: 
       - name: Installing Apache
@@ -12,7 +12,7 @@
       - name: Start Apache
         service: name=httpd state=started enabled=yes
 
-  - hosts: master:Edge:Utility
+  - hosts: webservers
     become: true
     tasks: 
       - name: Installing services

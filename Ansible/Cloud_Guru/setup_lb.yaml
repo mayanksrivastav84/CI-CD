@@ -1,0 +1,15 @@
+#Setup-lb.yaml
+
+---
+  - hosts:  loadbalancer
+    tasks:  
+      - name:  Creating template
+        template:
+          src:  lb_config.j2
+          dest: /etc/httpd/conf.d/lb.conf
+          owner:  bin
+          group:  wheel
+          mode: 064
+    
+      - name: Restart httpd
+        service:  name=httpd  service=restarted

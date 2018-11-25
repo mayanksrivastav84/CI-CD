@@ -1,7 +1,7 @@
 # setup-app.yml
 
 ---
-  - hosts: master:Utility
+  - hosts: webservers
     tasks:
       - name: Upload application file
         copy:
