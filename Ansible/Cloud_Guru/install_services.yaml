@@ -1,17 +1,18 @@
 #install-services.yaml
 
 ---
-  - hosts: Utility
+  - hosts: Utility:master
     become: true
     tasks: 
       - name: Installing Apache
         yum:  
           name=httpd  
           state=present
+      
       - name: Start Apache
         service: name=httpd state=started enabled=yes
 
-  - hosts: master:Edge
+  - hosts: master:Edge:Utility
     become: true
     tasks: 
       - name: Installing services
@@ -20,5 +21,6 @@
             - httpd
             - php
           state:  present
+      
       - name: Start Apache
         service: name=httpd state=started enabled=yes
