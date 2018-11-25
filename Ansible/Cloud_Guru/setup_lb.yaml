@@ -10,6 +10,8 @@
           owner:  bin
           group:  wheel
           mode: 064
+        notify: Restart httpd
     
+    handlers:
       - name: Restart httpd
         service:  name=httpd  service=restarted
