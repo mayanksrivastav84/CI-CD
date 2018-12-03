@@ -2,12 +2,17 @@
 -
    name:  Copy file to target Servers
    hosts: ns3080240.ip-145-239-0.eu
+<<<<<<< HEAD
    tasks:
 
      - name: Yum Install wget
        yum: name=wget state=present
 
 
+=======
+   tasks: 
+     
+>>>>>>> 835835e2c401bd260b985ea7ef1de9d68fcb397e
      - name: Download mysql rpm file
        get_url: 
          url_username: mayank.srivastav84@gmail.com
@@ -15,10 +20,15 @@
          url: https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
          dest: /tmp
          mode: 0440
+<<<<<<< HEAD
 
 
+=======
+     
+>>>>>>> 835835e2c401bd260b985ea7ef1de9d68fcb397e
      - name: Install RPM file for mysql 
        command: /usr/bin/rpm -ivh /tmp/mysql80-community-release-el7-1.noarch.rpm
+     
      - name: Yum Install mysql
        yum: name=mysql-server state=present
 

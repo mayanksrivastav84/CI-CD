@@ -1,0 +1,11 @@
+#Install Apache on all the servers
+
+-
+    name: Update Yum on all Hosts
+    hosts: all
+    tasks: 
+      - name: Update Yum on all servers
+        yum: 
+          name='*'
+          state=latest
+  
