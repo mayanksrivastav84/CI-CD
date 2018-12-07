@@ -21,3 +21,14 @@ resource "azurerm_resource_group" "factorsense" {
     }
 
 }
+
+resource "azurerm_resource_group" "webapp_factorsense" {
+
+    name = "webapp_factorsense"
+    location = "West Europe"
+
+    tags {
+        environment = "Production"
+    }
+
+}
