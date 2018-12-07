@@ -32,3 +32,13 @@ resource "azurerm_resource_group" "webapp_factorsense" {
     }
 
 }
+
+########################################################################################################
+# Create a Azure Recovery service vault 
+########################################################################################################
+resource "azurerm_recovery_services_vault" "fsvault" {
+  name                = "fsvault"
+  location            = "${azurerm_resource_group.factorsense.location}"
+  resource_group_name = "${azurerm_resource_group.factorsense.name}"
+  sku                 = "standard"
+}
