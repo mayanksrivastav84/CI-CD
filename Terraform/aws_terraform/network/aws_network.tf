@@ -4,22 +4,8 @@
 
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
-variable "private_key_path" {}
-variable "key_name" {
-  default = "FactorSense"
-}
-
-variable "network_address_space" {
-  default = "10.1.0.0/16"
-}
-
-variable "subnet1_address_space" {
-  default = "10.1.0.0/24"
-}
-
-variable "subnet2_address_space" {
-  default = "10.1.1.0/24"
-}
+variable "network_address_space" {}
+variable "aws_default_region" {}
 
 ########################################################################################################
 # Provider
@@ -28,13 +14,30 @@ variable "subnet2_address_space" {
 provider "aws" {
   access_key  = "${var.aws_access_key}"
   secret_key  = "${var.aws_secret_key}"
-  region      = "us-east-1"
+  region      = "${var.aws_default_region}"
+}
+
+########################################################################################################
+# Create a VPC
+########################################################################################################
+
+resource "aws_vpc" "vpc_factorsense" {
+  cidr_block       = "${var.network_address_space}"
+  instance_tenancy = "default"
+
+  tags = {
+    Name = "FactorSense VPC"
+  }
 }
 
 
 ########################################################################################################
-# DATA
+# Create an internet gateway and attach to VPC
 ########################################################################################################
+resource "aws_internet_gateway" "factorsense_igw" {
+  vpc_id = "${aws_vpc.vpc_factorsense.id}"
 
-data "aws_availability_zones" "available" {}
-
+  tags = {
+    Name = "FactorSense_IGW"
+  }
+}
