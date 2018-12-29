@@ -58,10 +58,11 @@ resource "aws_internet_gateway" "igw" {
 ########################################################################################################
 
 resource "aws_subnet" "subnet_public" {
-  count             = "${length(data.aws_availability_zones.availability_zones.names)}"
-  vpc_id            = "${aws_vpc.vpc_factorsense.id}"
-  availability_zone = "${element(data.aws_availability_zones.availability_zones.names, count.index)}"
-  cidr_block        = "${cidrsubnet(var.cidr_block, var.subnet_bits, count.index+1)}"
+  count                   = "${length(data.aws_availability_zones.availability_zones.names)}"
+  vpc_id                  = "${aws_vpc.vpc_factorsense.id}"
+  availability_zone       = "${element(data.aws_availability_zones.availability_zones.names, count.index)}"
+  cidr_block              = "${cidrsubnet(var.cidr_block, var.subnet_bits, count.index+1)}"
+  map_public_ip_on_launch = "True"
 
  tags {
     Name = "subnet_public-${count.index}"
@@ -90,11 +91,18 @@ resource "aws_route_table" "public_route" {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.igw.id}"
   }
+
+  tags = {
+    Name = "Public Route"
+  }
 }
 
 resource "aws_route_table" "private_route" {
   vpc_id = "${aws_vpc.vpc_factorsense.id}"
-
+  
+  tags = {
+    Name = "Private Route"
+  }
 }
 
 
@@ -117,3 +125,8 @@ resource "aws_route_table_association" "public_subnet" {
     route_table_id    = "${aws_route_table.public_route.id}"
 
 }
+
+
+########################################################################################################
+# NACL to allow 
+########################################################################################################
