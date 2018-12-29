@@ -58,7 +58,7 @@ resource "aws_internet_gateway" "igw" {
 ########################################################################################################
 
 resource "aws_subnet" "subnet_public" {
-  count                   = "${length(data.aws_availability_zones.availability_zones.names)}"
+  count                   = "${length(data.aws_availability_zones.availability_zones.names)-1}"
   vpc_id                  = "${aws_vpc.vpc_factorsense.id}"
   availability_zone       = "${element(data.aws_availability_zones.availability_zones.names, count.index)}"
   cidr_block              = "${cidrsubnet(var.cidr_block, var.subnet_bits, count.index+1)}"
@@ -71,7 +71,7 @@ resource "aws_subnet" "subnet_public" {
 
 
 resource "aws_subnet" "subnet_private" {
-  count             = "${length(data.aws_availability_zones.availability_zones.names)}"
+  count             = "${length(data.aws_availability_zones.availability_zones.names)-1}"
   vpc_id            = "${aws_vpc.vpc_factorsense.id}"
   availability_zone = "${element(data.aws_availability_zones.availability_zones.names, count.index)}"
   cidr_block        = "${cidrsubnet(var.cidr_block, var.subnet_bits, count.index+4)}"
@@ -112,14 +112,14 @@ resource "aws_route_table" "private_route" {
 ########################################################################################################
 
 resource "aws_route_table_association" "private_subnet" {
-    count             = "${length(data.aws_availability_zones.availability_zones.names)}"
+    count             = "${length(data.aws_availability_zones.availability_zones.names)-1}"
     subnet_id         = "${element(aws_subnet.subnet_private.*.id, count.index)}"
     route_table_id    = "${aws_route_table.private_route.id}"
 
 }
 
 resource "aws_route_table_association" "public_subnet" {
-    count             = "${length(data.aws_availability_zones.availability_zones.names)}"
+    count             = "${length(data.aws_availability_zones.availability_zones.names)-1}"
     subnet_id         = "${element(aws_subnet.subnet_public.*.id, count.index)}"
     route_table_id    = "${aws_route_table.public_route.id}"
 
