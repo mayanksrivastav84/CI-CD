@@ -9,6 +9,9 @@ In this example we will deploy only a Network infrastructire in AWS. We will dep
 5. Security Groups - We will create 3 security groups
 6. NACL - We will create one Network Access Control List. 
 
-The Terraform script used here is named as aws_network.tf. 
+In order to deploy the network resources, please update the variable file with your access key and secret key, which you can obtain from AWS console. 
+
+The script deploys public and private subnets in the Availability zones defined in the variable file for a given region. 
+
 
 ![](images/AWSNetwork.jpeg)
