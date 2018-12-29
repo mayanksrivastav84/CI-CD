@@ -7,7 +7,12 @@ variable "aws_secret_key" {}
 variable "cidr_block" {}
 variable "region" {}
 variable "subnet_bits" {}
-variable "availability_zones" {}
+
+########################################################################################################
+# List all the availability zones in the region 
+########################################################################################################
+
+data "aws_availability_zones" "availability_zones" {}
 
 ########################################################################################################
 # Provider
@@ -35,13 +40,19 @@ resource "aws_vpc" "vpc_factorsense" {
 }
 
 ########################################################################################################
-# Create an Subnets and attach to VPC and Internet Gateway
+# Create Internet Gateway and attach to VPC
+########################################################################################################
+
+
+
+########################################################################################################
+# Create Public and private subnets in each Availability Zone. 
 ########################################################################################################
 
 resource "aws_subnet" "subnet_public" {
-  count             = "${length(split(",", var.availability_zones))}"
+  count             = "${length(data.aws_availability_zones.availability_zones.names)}"
   vpc_id            = "${aws_vpc.vpc_factorsense.id}"
-  availability_zone = "${element(split(",",var.availability_zones), count.index)}"
+  availability_zone = "${element(data.aws_availability_zones.availability_zones.names, count.index)}"
   cidr_block        = "${cidrsubnet(var.cidr_block, var.subnet_bits, count.index+1)}"
 
  tags {
@@ -49,13 +60,14 @@ resource "aws_subnet" "subnet_public" {
   }
 }
 
+
 resource "aws_subnet" "subnet_private" {
-  count             = "${length(split(",", var.availability_zones))}"
+  count             = "${length(data.aws_availability_zones.availability_zones.names)}"
   vpc_id            = "${aws_vpc.vpc_factorsense.id}"
-  availability_zone = "${element(split(",",var.availability_zones), count.index)}"
-  cidr_block        = "${cidrsubnet(var.cidr_block, var.subnet_bits, count.index+3)}"
+  availability_zone = "${element(data.aws_availability_zones.availability_zones.names, count.index)}"
+  cidr_block        = "${cidrsubnet(var.cidr_block, var.subnet_bits, count.index+4)}"
 
  tags {
-    Name = "subnet_private-${count.index}"
+    Name = "subnet_public-${count.index}"
   }
 }

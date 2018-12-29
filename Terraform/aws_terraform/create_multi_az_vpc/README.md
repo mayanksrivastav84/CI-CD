@@ -11,7 +11,6 @@ In this example we will deploy only a Network infrastructire in AWS. We will dep
 
 In order to deploy the network resources, please update the variable file with your access key and secret key, which you can obtain from AWS console. 
 
-The script deploys public and private subnets in the Availability zones defined in the variable file for a given region. 
-
+The script identifies all the availability zones in the given region and deploys subnets in each of the region.
 
 ![](images/AWSNetwork.jpeg)
