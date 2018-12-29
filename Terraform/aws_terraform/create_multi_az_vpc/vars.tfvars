@@ -1,0 +1,6 @@
+aws_access_key          =   "<>"
+aws_secret_key          =   "<>"
+region                  =   "eu-central-1"
+cidr_block              =   "10.0.0.0/16"
+availability_zones      =   "eu-central-1a, eu-central-1b"
+subnet_bits             =   "8"
