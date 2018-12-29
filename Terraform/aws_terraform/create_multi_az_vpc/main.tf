@@ -49,7 +49,7 @@ resource "aws_internet_gateway" "igw" {
   vpc_id  = "${aws_vpc.vpc_factorsense.id}"
   
   tags = {
-    Name = "main"
+    Name = "InternetGateway"
   }
 }
 
@@ -81,7 +81,8 @@ resource "aws_subnet" "subnet_private" {
   }
 }
 
-########################################################################################################
+
+#######################################################################################################
 # Create Route Tables
 ########################################################################################################
 resource "aws_route_table" "public_route" {
@@ -91,11 +92,11 @@ resource "aws_route_table" "public_route" {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.igw.id}"
   }
-
-  tags = {
+    tags = {
     Name = "Public Route"
   }
 }
+
 
 resource "aws_route_table" "private_route" {
   vpc_id = "${aws_vpc.vpc_factorsense.id}"
@@ -117,8 +118,6 @@ resource "aws_route_table_association" "private_subnet" {
 
 }
 
-
-
 resource "aws_route_table_association" "public_subnet" {
     count             = "${length(data.aws_availability_zones.availability_zones.names)}"
     subnet_id         = "${element(aws_subnet.subnet_public.*.id, count.index)}"
@@ -127,6 +126,4 @@ resource "aws_route_table_association" "public_subnet" {
 }
 
 
-########################################################################################################
-# NACL to allow 
-########################################################################################################
+

@@ -8,3 +8,4 @@ Terraform/aws_terraform/create_multi_az_vpc/.terraform/plugins/darwin_amd64/lock
 Terraform/aws_terraform/create_multi_az_vpc/terraform.tfstate.backup
 Terraform/aws_terraform/create_multi_az_vpc/terraform.tfvars
 Terraform/aws_terraform/create_multi_az_vpc/terraform.tfstate
+Terraform/aws_terraform/create_multi_az_vpc/create_elastic_ip/terraform.tfstate
