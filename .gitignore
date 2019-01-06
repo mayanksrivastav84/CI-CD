@@ -12,3 +12,9 @@ Terraform/aws_terraform/create_multi_az_vpc/create_elastic_ip/terraform.tfstate
 Terraform/aws_terraform/create_multi_az_vpc/create_elastic_ip/.terraform/plugins/darwin_amd64/terraform-provider-aws_v1.54.0_x4
 Terraform/aws_terraform/create_multi_az_vpc/create_elastic_ip/terraform.tfstate.backup
 Terraform/aws_terraform/create_multi_az_vpc/create_elastic_ip/.terraform/plugins/darwin_amd64/lock.json
+Terraform/aws_terraform/aws_wordpress/terraform.tfvars
+Terraform/aws_terraform/aws_wordpress/terraform.tfstate.backup
+Terraform/aws_terraform/aws_wordpress/terraform.tfstate
+Terraform/aws_terraform/aws_wordpress/.terraform/plugins/darwin_amd64/terraform-provider-aws_v1.54.0_x4
+Terraform/aws_terraform/aws_wordpress/.terraform/plugins/darwin_amd64/lock.json
+Terraform/aws_terraform/aws_wordpress/.terraform.tfstate.lock.info
