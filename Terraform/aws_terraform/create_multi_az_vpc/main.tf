@@ -7,7 +7,6 @@ variable "aws_secret_key" {}
 variable "cidr_block" {}
 variable "region" {}
 variable "subnet_bits" {}
-variable "vpc_name" {}
 
 ########################################################################################################
 # List all the availability zones in the region 
@@ -54,7 +53,7 @@ resource "aws_internet_gateway" "igw" {
 }
 
 ########################################################################################################
-# Create Public and private subnets in each Availability Zone. 
+# Create Public Subnet  in each Availability Zone. 
 ########################################################################################################
 
 resource "aws_subnet" "subnet_public" {
@@ -66,18 +65,6 @@ resource "aws_subnet" "subnet_public" {
 
  tags {
     Name = "subnet_public-${count.index}"
-  }
-}
-
-
-resource "aws_subnet" "subnet_private" {
-  count             = "${length(data.aws_availability_zones.availability_zones.names)-1}"
-  vpc_id            = "${aws_vpc.vpc_factorsense.id}"
-  availability_zone = "${element(data.aws_availability_zones.availability_zones.names, count.index)}"
-  cidr_block        = "${cidrsubnet(var.cidr_block, var.subnet_bits, count.index+4)}"
-
- tags {
-    Name = "subnet_private-${count.index}"
   }
 }
 
@@ -97,26 +84,9 @@ resource "aws_route_table" "public_route" {
   }
 }
 
-
-resource "aws_route_table" "private_route" {
-  vpc_id = "${aws_vpc.vpc_factorsense.id}"
-  
-  tags = {
-    Name = "Private Route"
-  }
-}
-
-
 ########################################################################################################
 # Route Tables Association
 ########################################################################################################
-
-resource "aws_route_table_association" "private_subnet" {
-    count             = "${length(data.aws_availability_zones.availability_zones.names)-1}"
-    subnet_id         = "${element(aws_subnet.subnet_private.*.id, count.index)}"
-    route_table_id    = "${aws_route_table.private_route.id}"
-
-}
 
 resource "aws_route_table_association" "public_subnet" {
     count             = "${length(data.aws_availability_zones.availability_zones.names)-1}"
@@ -124,6 +94,3 @@ resource "aws_route_table_association" "public_subnet" {
     route_table_id    = "${aws_route_table.public_route.id}"
 
 }
-
-
-
