@@ -167,3 +167,65 @@ resource "aws_route_table_association" "public_subnet" {
     route_table_id    = "${aws_route_table.public_route.id}"
 
 }
+
+########################################################################################################
+# Security Group
+########################################################################################################
+
+resource "aws_security_group" "allow_http_traffic" {
+  name        = "allow_http_traffic"
+  description = "Allow all HTTP traffic"
+  vpc_id      = "${aws_vpc.wordpress-factorsense.id}"
+
+  ingress {
+    from_port   = 0
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+}
+
+
+########################################################################################################
+# Application Load Balancer
+########################################################################################################
+
+resource "aws_lb" "wordpress_elb" {
+  name               = "wordpress-app-lb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = ["${aws_security_group.allow_http_traffic.id}"]
+  subnets            = ["${aws_subnet.public_subnet.*.id}"]
+
+  enable_deletion_protection = true
+}
+
+########################################################################################################
+# Elastic File System
+########################################################################################################
+resource "aws_efs_file_system" "wordpress-file-system" {
+  creation_token = "wordpress-file-system"
+
+  tags = {
+    Name = "wordpress-file-system"
+  }
+}
+
+########################################################################################################
+# Elastic File System Mount Target 
+########################################################################################################
+
+resource "aws_efs_mount_target" "wordpress-file-system-trgt" {
+  file_system_id = "${aws_efs_file_system.wordpress-file-system.id}"
+  subnet_id      = "${aws_subnet.private_data_subnet.*.id}"
+}
+
+
+
