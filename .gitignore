@@ -18,3 +18,8 @@ Terraform/aws_terraform/aws_wordpress/terraform.tfstate
 Terraform/aws_terraform/aws_wordpress/.terraform/plugins/darwin_amd64/terraform-provider-aws_v1.54.0_x4
 Terraform/aws_terraform/aws_wordpress/.terraform/plugins/darwin_amd64/lock.json
 Terraform/aws_terraform/aws_wordpress/.terraform.tfstate.lock.info
+.DS_Store
+Terraform/azure_terraform/azure_rg/.terraform/plugins/darwin_amd64/terraform-provider-azurerm_v1.24.0_x4
+.DS_Store
+.gitignore
+Terraform/azure_terraform/azure_rg/.terraform/plugins/darwin_amd64/lock.json
