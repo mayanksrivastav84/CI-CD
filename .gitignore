@@ -23,3 +23,8 @@ Terraform/azure_terraform/azure_rg/.terraform/plugins/darwin_amd64/terraform-pro
 .DS_Store
 .gitignore
 Terraform/azure_terraform/azure_rg/.terraform/plugins/darwin_amd64/lock.json
+Terraform/azure_terraform/AZ-300/tfvars.tfvars
+Terraform/azure_terraform/AZ-300/terraform.tfstate
+Terraform/azure_terraform/AZ-300/terraform.tfstate.backup
+Terraform/azure_terraform/AZ-300/.terraform/plugins/darwin_amd64/lock.json
+Terraform/azure_terraform/AZ-300/.terraform/plugins/darwin_amd64/terraform-provider-azurerm_v1.29.0_x4
